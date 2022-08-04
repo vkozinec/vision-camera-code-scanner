@@ -213,9 +213,11 @@ public class VisionCameraCodeScannerPlugin extends FrameProcessorPlugin {
 
     map.putMap("content", convertContent(barcode));
     map.putInt("format", barcode.getFormat());
-    
+
     byte[] rawBytes = barcode.getRawBytes();
     if (rawBytes != null) {
+      String encoded = Base64.encodeToString(rawBytes, Base64.DEFAULT);
+      map.putString("base64encoded",  encoded);
       map.putArray("binary", convertToBinaryArray(rawBytes));
     }
     return map;
