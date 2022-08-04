@@ -142,4 +142,10 @@ class BarcodeConverter {
 
         return map
     }
+
+        public static func convertToBinaryArray(bytes: Data?) -> Any! {
+        return bytes?.map{
+            String($0, radix: 2)
+        }
+    }
 }

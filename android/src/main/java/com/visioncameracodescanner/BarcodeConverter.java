@@ -239,4 +239,14 @@ public class BarcodeConverter {
 
     return map;
   }
+
+  public static WritableNativeArray convertToBinaryArray(@NonNull byte[] rawBytes) {
+    WritableNativeArray array = new WritableNativeArray();
+
+    for (byte rawByte : rawBytes) {
+      array.pushString(String.format("%8s", Integer.toBinaryString(rawByte & 0xFF)).replace(' ', '0'));
+    }
+
+    return array;
+  }
 }
