@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.google.mlkit.vision.barcode.Barcode;
+import com.google.mlkit.vision.barcode.common.Barcode;
 
 import java.util.List;
 
@@ -238,5 +238,15 @@ public class BarcodeConverter {
     map.putString("middleName", driverLicense.getMiddleName());
 
     return map;
+  }
+
+  public static WritableNativeArray convertToBinaryArray(@NonNull byte[] rawBytes) {
+    WritableNativeArray array = new WritableNativeArray();
+
+    for (byte rawByte : rawBytes) {
+      array.pushString(String.format("%8s", Integer.toBinaryString(rawByte & 0xFF)).replace(' ', '0'));
+    }
+
+    return array;
   }
 }
